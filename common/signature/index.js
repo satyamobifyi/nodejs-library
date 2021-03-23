@@ -3,7 +3,7 @@ const rsu = require("jsrsasign-util");
 const path = require("path");
 const ventajaOptions = require("../../common/options/IVentajaOption")
 
-class Base {
+module.exports = class Base {
 
     constructor(
         options
