@@ -1,4 +1,8 @@
+const { required } = require("joi");
 
 
-module.exports = require("./common/signature");
+module.exports = {
+    SignService: require("./common/signature"),
+    HealthService: require("./lib/ventaja-health-government")
+}
 
