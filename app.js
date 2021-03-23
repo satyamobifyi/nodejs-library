@@ -18,13 +18,16 @@ console.log('philhealthService', philhealthService)
 
 
 
-app.post('/validate-philhealth-payment', (req,res)=>{
-    const result = philhealthService.validatePhilHealthPayment(req.body)
-    console.log('req', req.body)
-    const payload = req.body
+app.post('/validate-philhealth-payment', async(req,res)=>{
+    const result = await philhealthService.validatePhilHealthPayment(req.body)
+    const payload = {
+        ...instanceNew.optionsConfig,
+        data: result
+    }
+    console.info(payload)
+    res.json(result)
 
 
-    
 })
 
 app.listen(3000, () => {

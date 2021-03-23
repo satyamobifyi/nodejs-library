@@ -18,7 +18,10 @@ module.exports = {
         })
 
         const { error, value: initialOptions } = payloadSchema.validate(payload);
-        console.log('value', initialOptions);
-        console.error(error)
+        if(error){
+            throw error
+        }else{
+            return initialOptions
+        }
     }
 }
