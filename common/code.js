@@ -7,4 +7,6 @@ module.exports = VentajaCodes = {
 module.exports = PhilHealtCode = {
     VALIDATE_CONTRIBUTION: 106,
     PROCESS_CONTRIBUTION: 106,
+    TRANSACTION_INQUIRY: 107,
+    CANCEL_TRANSACTION: 107,
 }

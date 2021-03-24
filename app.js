@@ -20,8 +20,33 @@ const service = new SignService(options);
 
 app.post('/validate-philhealth-payment', async(req,res)=>{
     // console.log('req.payload', req.body)
-    const result = await service.healthServide.validatePhilHealthPayment(req.body)
-    res.json(result)
+    try {
+        const result = await service.healthServide.validatePhilHealthPayment(req.body)
+        if(result.status == 200){
+            return res.json(result)
+        }else{
+            return res.status(result.status).send(result)
+        }
+        
+    } catch (error) {
+        console.log('API error', error)
+        res.status(error.status || 500).send(error)
+    }
+})
+app.post('/process-philhealth-payment', async(req,res)=>{
+    // console.log('req.payload', req.body)
+    try {
+        const result = await service.healthServide.processPhilHealthPayment(req.body)
+        if(result.status == 200){
+            return res.json(result)
+        }else{
+            return res.status(result.status).send(result)
+        }
+        
+    } catch (error) {
+        console.log('API error', error)
+        res.status(error.status || 500).send(error)
+    }
 })
 
 app.listen(3000, () => {
