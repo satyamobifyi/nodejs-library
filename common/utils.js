@@ -21,7 +21,7 @@ module.exports = class UtilService {
         return await axios.request({
             url: endPoint,
             method: "POST",
-            data: JSON.stringify(data),
+            data: data ? JSON.stringify(data) : data,
             headers: signt,
         })
 

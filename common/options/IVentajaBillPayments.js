@@ -2,7 +2,7 @@ const Joi = require("joi")
 
 module.exports = {
   validateITopUpWallet: function validateITopUpWallet(payload) {
-    const payloadSchema = {
+    const payloadSchema = Joi.object({
       /**
      * user pay remit number
      */
@@ -19,7 +19,7 @@ module.exports = {
        * unique agent reference number
        */
       agentRefNo: Joi.string().required(),
-    } // End of process wallet interface
+    }) // End of process wallet interface
 
     const { error, value: initialOptions } = payloadSchema.validate(payload);
     if (error) {
@@ -30,7 +30,7 @@ module.exports = {
   },
 
   validateITransaction: function validateITransaction(payload) {
-    const payloadSchema = {
+    const payloadSchema = Joi.object({
      /**
      * transaction number
      */
@@ -43,7 +43,7 @@ module.exports = {
      * provide agent reference number
      */
     agentRefNo: Joi.string().required(),
-    } // End of process wallet interface
+    }) // End of process wallet interface
 
     const { error, value: initialOptions } = payloadSchema.validate(payload);
     if (error) {
@@ -54,12 +54,12 @@ module.exports = {
   },
 
   validateIReservationDetail: function validateIReservationDetail(payload) {
-    const payloadSchema = {
+    const payloadSchema = Joi.object({
      /**
      * reservation number
      */
     reservationNumber: Joi.string().required(),
-    } // End of process wallet interface
+    }) // End of process wallet interface
 
     const { error, value: initialOptions } = payloadSchema.validate(payload);
     if (error) {
@@ -70,7 +70,7 @@ module.exports = {
   },
 
   validateIReservationPaymentDetail: function validateIReservationPaymentDetail(payload) {
-    const payloadSchema = {
+    const payloadSchema = Joi.object({
      /**
          * reservation number
          */
@@ -95,7 +95,7 @@ module.exports = {
        * agent reference number
        */
       agentRefNo: Joi.string().required(),
-    } // End of process wallet interface
+    }) // End of process wallet interface
 
     const { error, value: initialOptions } = payloadSchema.validate(payload);
     if (error) {
@@ -106,7 +106,7 @@ module.exports = {
   },
 
   validateIReservationEnquiry: function validateIReservationEnquiry(payload) {
-    const payloadSchema = {
+    const payloadSchema = Joi.object({
      /**
          * reservation code such as 143
          */
@@ -114,16 +114,16 @@ module.exports = {
       /**
        * transaction number
        */
-      transactionNumber?: Joi.string().required(),
+      transactionNumber: Joi.string().required(),
       /**
        * reference number provided to user
        */
-      referenceNumber?: Joi.string().required(),
+      referenceNumber: Joi.string().required(),
       /**
        * agent reference number
        */
       agentRefNo: Joi.string().required(),
-    } // End of process wallet interface
+    }) // End of process wallet interface
 
     const { error, value: initialOptions } = payloadSchema.validate(payload);
     if (error) {
@@ -134,15 +134,15 @@ module.exports = {
   },
 
   validateIPullReservationDetails: function validateIPullReservationDetails(payload) {
-    const payloadSchema = {
+    const payloadSchema = Joi.object({
      /**
          * reservation code such as 143
          */
-      reservationCode: Joi.number().required(),
+      code: Joi.number().required(),
       /**
        * transaction number
        */
-      transactionNumber?: Joi.string().required(),
+      transactionNumber: Joi.string().required(),
       /**
        * reference number provided to user
        */
@@ -151,7 +151,8 @@ module.exports = {
        * agent reference number
        */
       agentRefNo: Joi.string().required(),
-    } // End of process wallet interface
+
+    }) // End of process wallet interface
 
     const { error, value: initialOptions } = payloadSchema.validate(payload);
     if (error) {
@@ -162,7 +163,7 @@ module.exports = {
   },
 
   validateIValidateBilling: function validateIValidateBilling(payload) {
-    const payloadSchema = {
+    const payloadSchema = Joi.object({
      /**
          * provided user biller code
          */
@@ -183,7 +184,7 @@ module.exports = {
        * agent reference number
        */
       agentRefNo: Joi.string().required(),
-    } // End of process wallet interface
+    }) // End of process wallet interface
 
     const { error, value: initialOptions } = payloadSchema.validate(payload);
     if (error) {
@@ -194,7 +195,7 @@ module.exports = {
   },
 
   validateIProcessBilling: function validateIProcessBilling(payload) {
-    const payloadSchema = {
+    const payloadSchema = Joi.object({
      /**
          * provided user biller code
          */
@@ -215,7 +216,7 @@ module.exports = {
        * agent reference number
        */
       agentRefNo: Joi.string().required(),
-    } // End of process wallet interface
+    }) // End of process wallet interface
 
     const { error, value: initialOptions } = payloadSchema.validate(payload);
     if (error) {

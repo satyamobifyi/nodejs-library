@@ -1,0 +1,12 @@
+
+const VENATJA_BILL_CODES = {
+    TOPUP: 147,
+    BALANCE: 100,
+    RESERVATION: 149,
+    RESERVATION_DETAIL: 148,
+    VALIDATE_BILLING: 118,
+}
+
+module.exports = {
+    VENATJA_BILL_CODES
+}

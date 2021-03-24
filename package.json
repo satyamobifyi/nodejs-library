@@ -15,11 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
-    "btoa": "^1.2.1",
     "express": "^4.17.1",
     "joi": "^17.4.0",
     "jsrsasign": "^10.1.13",
-    "jsrsasign-util": "^1.0.4",
-    "request": "^2.88.2"
+    "jsrsasign-util": "^1.0.4"
   }
 }

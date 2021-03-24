@@ -1,20 +1,29 @@
 const CUSTOM_ERRORS = require('../exceptions/index')
 module.exports = class CustomHttpExceptions {
-    constructor(){}
+    constructor() { }
     async throwHttpError(res) {
-        if(
-            res && 
-            res.data && 
-            res.data.responseCode && 
+        let dataSentToVentaja = {}
+        if (
+            res &&
+            res.config &&
+            res.config.data
+        ) {
+            dataSentToVentaja = JSON.parse(res.config.data);
+            delete dataSentToVentaja.id;
+            delete dataSentToVentaja.uid;
+            delete dataSentToVentaja.pwd;
+        }
+
+        if (
+            res &&
+            res.data &&
+            res.data.responseCode &&
             res.data.responseCode !== 100) {
-                // return CUSTOM_ERRORS[res.data.responseCode]
-                const error = CUSTOM_ERRORS[res.data.responseCode] 
-                error.status = 400;
-                throw error
-                // throw new Error(
-                //     CUSTOM_ERRORS[res.data.responseCode] || res.data
-                // )
-            }
+            const error = CUSTOM_ERRORS[res.data.responseCode] || res.data
+            error.status = 400;
+            error.dataSentToVentaja = dataSentToVentaja;
+            throw error
+        }
     }
 
 }

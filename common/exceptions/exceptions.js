@@ -159,4 +159,9 @@ module.exports = {
         message: "system error",
         description: "An unexpected error occurred"
     },
+    133: {
+        responseCode: 133,
+        message: "INVALID REQUEST CODE",
+        description: "The supplied code is not valid"
+    },
 }
