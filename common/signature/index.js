@@ -4,6 +4,7 @@ const path = require("path");
 const ventajaOptions = require("../../common/options/IVentajaOption");
 const VentajaPhilHealthGovernment = require('../../lib/ventaja-health-government');
 const VentajaBillPayments = require("../../lib/ventaja-bill-payments");
+const VentajaIbgPayments = require("../../lib/ventaja-ibg-payment");
 
 module.exports = class Base {
     
@@ -16,6 +17,7 @@ module.exports = class Base {
         this.pem = "";
         this.healthServide = new VentajaPhilHealthGovernment(validateOptions)
         this.billPaymentService = new VentajaBillPayments(validateOptions)
+        this.ventajaIbgPaymentService = new VentajaIbgPayments(validateOptions)
     } // End of the constructor
     
 
