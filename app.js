@@ -49,6 +49,38 @@ app.post('/process-philhealth-payment', async(req,res)=>{
     }
 })
 
+app.post('/validate-sss-contribution-search', async(req,res)=>{
+    // console.log('req.payload', req.body)
+    try {
+        const result = await service.sssPaymentService.validateContributionSearchPrnByMember(req.body)
+        if(result.status == 200){
+            return res.json(result)
+        }else{
+            return res.status(result.status).send(result)
+        }
+        
+    } catch (error) {
+        console.log('API error', error)
+        res.status(error.status || 500).send(error)
+    }
+})
+
+app.post('/validate-sss-contribution-search', async(req,res)=>{
+    // console.log('req.payload', req.body)
+    try {
+        const result = await service.sssPaymentService.processContributionSearchPrnByMember(req.body)
+        if(result.status == 200){
+            return res.json(result)
+        }else{
+            return res.status(result.status).send(result)
+        }
+        
+    } catch (error) {
+        console.log('API error', error)
+        res.status(error.status || 500).send(error)
+    }
+})
+
 app.listen(3000, () => {
     console.log("Your app is listenting port ####-------", 3000, "-------####")
 }) // End of app listening

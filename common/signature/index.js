@@ -2,7 +2,8 @@ const rs = require("jsrsasign");
 const rsu = require("jsrsasign-util");
 const path = require("path");
 const ventajaOptions = require("../../common/options/IVentajaOption");
-const VentajaPhilHealthGovernment = require('../../lib/ventaja-health-government')
+const VentajaPhilHealthGovernment = require('../../lib/ventaja-health-government');
+const VentajaSssPayment = require("../../lib/ventaja-sss-payment");
 module.exports = class Base {
     
     constructor(
@@ -13,6 +14,7 @@ module.exports = class Base {
         this.optionsConfig = validateOptions;   
         this.pem = "";
         this.healthServide = new VentajaPhilHealthGovernment(validateOptions)
+        this.sssPaymentService = new VentajaSssPayment(validateOptions)
     } // End of the constructor
     
 
