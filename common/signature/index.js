@@ -13,7 +13,7 @@ module.exports = class Base {
         const validateOptions = ventajaOptions.validateOptions(options);
         this.optionsConfig = validateOptions;   
         this.pem = "";
-        this.healthServide = new VentajaPhilHealthGovernment(validateOptions)
+        this.healthService = new VentajaPhilHealthGovernment(validateOptions)
         this.sssPaymentService = new VentajaSssPayment(validateOptions)
     } // End of the constructor
     
