@@ -2,7 +2,6 @@ const axios = require("axios");
 const rs = require("jsrsasign");
 const rsu = require("jsrsasign-util");
 const path = require("path");
-const btoa = require('btoa')
 
 
 module.exports = class UtilService {

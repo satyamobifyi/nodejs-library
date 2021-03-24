@@ -1,6 +1,6 @@
 {
   "name": "ventaja-nodejs-library",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "This is for ventaja nodejs library to push the code on npm package",
   "main": "index.js",
   "scripts": {
