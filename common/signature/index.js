@@ -1,17 +1,18 @@
 const rs = require("jsrsasign");
 const rsu = require("jsrsasign-util");
 const path = require("path");
-const ventajaOptions = require("../../common/options/IVentajaOption")
-
+const ventajaOptions = require("../../common/options/IVentajaOption");
+const VentajaPhilHealthGovernment = require('../../lib/ventaja-health-government')
 module.exports = class Base {
-
+    
     constructor(
         options
     ) {
-        console.log("Your options", options)
+        // console.log("Your options", options)
         const validateOptions = ventajaOptions.validateOptions(options);
-        this.optionsConfig = validateOptions;
+        this.optionsConfig = validateOptions;   
         this.pem = "";
+        this.healthServide = new VentajaPhilHealthGovernment(validateOptions)
     } // End of the constructor
     
 
@@ -26,7 +27,7 @@ module.exports = class Base {
             /**
              * required pem file to make a SHA1withRSA signature
              */
-            console.log("Your data", this.optionsConfig)
+            // console.log("Your data", this.optionsConfig)
             this.pem = path.join(__dirname, + this.optionsConfig.certificatePath)
             
         } catch (error) {
@@ -57,7 +58,7 @@ module.exports = class Base {
 
     createSignature(data) {
         try {
-            console.log("Your data for this.pem", this.pem);
+            // console.log("Your data for this.pem", this.pem);
             const sig = new rs.Signature({alg: "SHA1withRSA"});
             sig.init(this.pem);
             const value1 = JSON.stringify(data);
@@ -72,4 +73,10 @@ module.exports = class Base {
             throw new Error(error);
         }
     } // Create RSAwithSHA signature of payload
+
+    // providers() {
+        
+    // }
+
+
 }

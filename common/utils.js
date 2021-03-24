@@ -1,6 +1,11 @@
 const axios = require("axios");
+const rs = require("jsrsasign");
+const rsu = require("jsrsasign-util");
+const path = require("path");
+const btoa = require('btoa')
 
-export default class UtilService {
+
+module.exports = class UtilService {
 
     constructor(
 
@@ -11,12 +16,16 @@ export default class UtilService {
      * @param {*} data 
      * @returns api call data
      */
-    async postWithSignature(endPoint, data) {
+    async postWithSignature(endPoint, data, signature) {
+        const signt = this.getHeaders(signature)
         return await axios.request({
-            url: url,
+            url: endPoint,
             method: "POST",
-            body: data
+            data: JSON.stringify(data),
+            headers: signt,
         })
+
+        
     } // End of postWithSignature function
 
     /**
@@ -30,4 +39,44 @@ export default class UtilService {
             "Signature": signature,
         };
     }// End of getHeaders function
+
+    btoa(str) {
+        let buffer;
+
+        if (str instanceof Buffer) {
+            buffer = str;
+        } else {
+            buffer = Buffer.from(str.toString(), "binary");
+        }
+
+        return buffer;
+    } // End of btoa function
+
+
+    hexToBase64(data) {
+        /**
+         * @returns data after converting to base64 using btoa function
+         */
+       return this.btoa(String.fromCharCode.apply(null,
+            data.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
+        ).toString("base64");
+    } // End of hexToBase64 function
+
+    createSignature(certificatePath, data) {
+        try {
+            let pem = rsu.readFile(certificatePath);
+            const sig = new rs.Signature({alg: "SHA1withRSA"});
+            sig.init(pem);
+            const value1 = JSON.stringify(data);
+            sig.updateString(value1);
+
+            return sig.sign();
+        } catch (error) {
+            /**
+             * If something went wrong
+             */
+            // console.error("Error Creating signature", error);
+            throw new Error(error);
+        }
+    } // Create RSAwithSHA signature of payload
 }
